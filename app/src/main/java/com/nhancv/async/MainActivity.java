@@ -1,6 +1,7 @@
 package com.nhancv.async;
 
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -16,13 +17,15 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.tvMsg)
     TextView tvMsg;
 
+    private MyWorkerThread myWorkerThread;
     private Handler handler;
 
     @AfterViews
     void init() {
         handler = new Handler();
 
-        new Thread(() -> {
+        myWorkerThread = new MyWorkerThread("My thread");
+        myWorkerThread.postTask(() -> {
             for (int i = 0; i < 5; i++) {
                 int finalI = i;
                 handler.post(() -> {
@@ -30,8 +33,26 @@ public class MainActivity extends AppCompatActivity {
                 });
                 SystemClock.sleep(1000);
             }
-        }).start();
 
+            handler.post(() -> {
+                tvMsg.setText("Done");
+            });
+        });
+    }
+
+    private class MyWorkerThread extends HandlerThread {
+
+        private Handler workerHandler;
+
+        public MyWorkerThread(String name) {
+            super(name);
+            start();
+            workerHandler = new Handler(getLooper());
+        }
+
+        public void postTask(Runnable task) {
+            workerHandler.post(task);
+        }
     }
 
 
