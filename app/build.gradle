@@ -38,7 +38,12 @@ dependencies {
     compile 'org.androidannotations:androidannotations-api:4.1.0'
     //https://square.github.io/retrofit/
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     //https://github.com/google/gson
     compile 'com.google.code.gson:gson:2.4'
+    //http://reactivex.io/
+    compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'io.reactivex:rxjava:1.1.5'
 
 }
