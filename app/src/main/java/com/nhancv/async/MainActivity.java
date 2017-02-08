@@ -1,7 +1,5 @@
 package com.nhancv.async;
 
-import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -17,28 +15,15 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.tvMsg)
     TextView tvMsg;
 
-    private Handler handler;
-
     @AfterViews
     void init() {
 
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                String tickMsg = msg.obj.toString();
-                tvMsg.setText(tickMsg);
-            }
-        };
-
         new Thread(() -> {
             for (int i = 0; i < 5; i++) {
-                //get message from MainThread
-                Message msg = handler.obtainMessage();
-                //update message
-                msg.obj = "Tick  " + i;
-                //return message back to MainThread
-                handler.sendMessage(msg);
+                int finalI = i;
+                runOnUiThread(() -> {
+                    tvMsg.setText(String.format("Tick  %s", finalI));
+                });
                 SystemClock.sleep(1000);
             }
         }).start();
