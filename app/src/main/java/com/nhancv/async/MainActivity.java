@@ -23,9 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @AfterViews
     void init() {
         handler = new Handler();
-
-        myWorkerThread = new MyWorkerThread("My thread");
-        myWorkerThread.postTask(() -> {
+        Runnable task = () -> {
             for (int i = 0; i < 5; i++) {
                 int finalI = i;
                 handler.post(() -> {
@@ -37,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
             handler.post(() -> {
                 tvMsg.setText("Done");
             });
-        });
+        };
+        myWorkerThread = new MyWorkerThread("My thread");
+        myWorkerThread.postTask(task);
+        myWorkerThread.postTask(task);
+        myWorkerThread.postTask(task);
     }
 
     private class MyWorkerThread extends HandlerThread {
