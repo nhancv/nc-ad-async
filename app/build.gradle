@@ -40,5 +40,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     //https://github.com/google/gson
     compile 'com.google.code.gson:gson:2.4'
+    //https://github.com/BoltsFramework/Bolts-Android
+    compile 'com.parse.bolts:bolts-tasks:1.4.0'
+    compile 'com.parse.bolts:bolts-applinks:1.4.0'
 
 }
