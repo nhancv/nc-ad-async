@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
         new TickWithAsyncTask().execute();
     }
 
+    /**
+     * Update text
+     *
+     * @param tick
+     */
     private void updateText(String tick) {
         tvMsg.setText(tick);
     }
