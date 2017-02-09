@@ -35,10 +35,18 @@ public class MainActivity extends AppCompatActivity {
         fetchGithub();
     }
 
+    /**
+     * Update text
+     *
+     * @param txt
+     */
     private void updateText(String txt) {
         tvMsg.setText(txt);
     }
 
+    /**
+     * Fetch repo list on github
+     */
     private void fetchGithub() {
 
         Task<Void> task = taskGitHub()
@@ -81,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
         }, Task.UI_THREAD_EXECUTOR);
     }
 
+    /**
+     * Create task which fetch repo list on github with bolts
+     *
+     * @return
+     */
     private Task<List<Repo>> taskGitHub() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
