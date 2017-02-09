@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
             workerHandler = new Handler(getLooper());
         }
 
+        /**
+         * Post task and run from schedule
+         *
+         * @param task
+         */
         public void postTask(Runnable task) {
             workerHandler.post(task);
         }
