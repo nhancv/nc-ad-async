@@ -23,10 +23,18 @@ public class MainActivity extends AppCompatActivity {
         rxSample();
     }
 
+    /**
+     * Update text
+     *
+     * @param tick
+     */
     private void updateText(String tick) {
         tvMsg.setText(tick);
     }
 
+    /**
+     * Some samples with rxandroid
+     */
     private void rxSample() {
 
         Observable.defer(() -> Observable.just(1, 2, 3, 4, 5, 6))
